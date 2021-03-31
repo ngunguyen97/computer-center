@@ -1,0 +1,19 @@
+.navbar-brand {
+    @media (max-width: 576px) {
+        flex: 1;
+    }
+
+    .logo-mobile {
+        @media (max-width: 576px) {
+            display: inline-flex;
+        }
+        display: none;
+    }
+}
+
+.logo-desktop {
+    display: none;
+    @media (min-width: 576px) {
+        display: block;
+    }
+}
