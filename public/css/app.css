@@ -13985,6 +13985,19 @@ a.text-dark:focus {
   }
 }
 
+footer {
+  background-color: #2b96c1;
+  padding: 3rem;
+  margin: 1.5rem 0 0 0;
+  color: white;
+  font-size: 1.6rem;
+}
+
+footer .list-group-item {
+  background-color: transparent;
+  font-size: 1.4rem;
+}
+
 @media (max-width: 576px) {
   .navbar-brand {
     flex: 1;
@@ -14009,5 +14022,84 @@ a.text-dark:focus {
   .logo-desktop {
     display: block;
   }
+}
+
+.navigation {
+  background-color: #2b96c1;
+}
+
+.navigation .navbar-light .nav-item a.nav-link {
+  color: white;
+  font-size: 1.6rem;
+}
+
+.banner {
+  max-height: 80%;
+  overflow: hidden;
+}
+
+.news .card--medium {
+  height: 38rem;
+  overflow: hidden;
+}
+
+.news .card--medium .card-title {
+  font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1.2rem;
+  margin: 0 -1.5rem;
+}
+
+.news .card__small .card-title {
+  font-size: 1.7rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1.2rem;
+  margin: 0 -1.2rem;
+}
+
+.schedule {
+  font-size: 1.6rem;
+  margin: 2rem 0;
+}
+
+.schedule__text {
+  font-weight: 600;
+}
+
+.schedule__heading {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #2b96c1;
+}
+
+.schedule .card {
+  border: none;
+  background-color: transparent;
+}
+
+.schedule .card-title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+@media only screen and (max-width: 75em) {
+  html {
+    font-size: 50%;
+  }
+}
+
+.p-10 {
+  padding: 0.7rem;
+}
+
+.mt-100 {
+  margin-top: 100px;
 }
 

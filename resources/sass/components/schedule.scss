@@ -1,0 +1,26 @@
+.schedule {
+  font-size: 1.6rem;
+  margin: 2rem 0;
+
+  &__text {
+    font-weight: 600;
+  }
+
+  &__heading {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 120%;
+    text-transform: uppercase;
+    color: #2b96c1;
+  }
+
+  .card {
+    border: none;
+    background-color: transparent;
+  }
+
+  .card-title {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}

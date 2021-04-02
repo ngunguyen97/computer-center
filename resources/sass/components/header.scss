@@ -1,19 +1,37 @@
 .navbar-brand {
-    @media (max-width: 576px) {
-        flex: 1;
-    }
+  @media (max-width: 576px) {
+    flex: 1;
+  }
 
-    .logo-mobile {
-        @media (max-width: 576px) {
-            display: inline-flex;
-        }
-        display: none;
+  .logo-mobile {
+    @media (max-width: 576px) {
+      display: inline-flex;
     }
+    display: none;
+  }
 }
 
 .logo-desktop {
-    display: none;
-    @media (min-width: 576px) {
-        display: block;
+  display: none;
+  @media (min-width: 576px) {
+    display: block;
+  }
+}
+
+.navigation {
+  background-color: #2b96c1;
+
+  .navbar-light {
+    .nav-item {
+      a.nav-link {
+        color: white;
+        font-size: 1.6rem;
+      }
     }
+  }
+}
+
+.banner {
+  max-height: 80%;
+  overflow: hidden;
 }
