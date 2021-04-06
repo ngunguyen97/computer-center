@@ -14057,6 +14057,15 @@ footer .list-group-item {
   margin: 0 -1.2rem;
 }
 
+.room {
+  font-size: 1.6rem;
+  margin: 2rem 0;
+}
+
+.room td a {
+  font-size: 1.6rem;
+}
+
 .schedule {
   font-size: 1.6rem;
   margin: 2rem 0;
