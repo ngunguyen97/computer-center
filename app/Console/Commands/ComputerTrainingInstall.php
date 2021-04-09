@@ -54,6 +54,18 @@ class ComputerTrainingInstall extends Command
           '--class' => 'VoyagerDummyDatabaseSeeder',
         ]);
 
+        $this->call('db:seed',[
+          '--class' => 'TeachersTableSeeder',
+        ]);
+
+        $this->call('db:seed',[
+          '--class' => 'RoomsTableSeeder',
+        ]);
+
+        $this->call('db:seed',[
+          '--class' => 'ClassroomsTableSeeder',
+        ]);
+
         $this->info('Dummy data installed');
       }
 
