@@ -16,4 +16,8 @@ class Classroom extends Model
     return $this->belongsTo(Teacher::class);
   }
 
+  public function categories() {
+    return $this->belongsToMany(Category::class);
+  }
+
 }
