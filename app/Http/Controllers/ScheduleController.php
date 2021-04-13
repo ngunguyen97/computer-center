@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Room;
+use App\Category;
+use App\Classroom;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -14,8 +15,10 @@ class ScheduleController extends Controller
    */
   public function index()
   {
-    $rooms = Room::where('TrangThai', true)->get();
-    return view('schedule')->with('rooms', $rooms);
+    $rooms = Classroom::with('categories')->where('status', true)->get();
+    $categories = Category::all();
+
+    return view('schedule')->with(compact('rooms', 'categories'));
   }
 
   /**
