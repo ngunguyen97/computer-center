@@ -14058,12 +14058,21 @@ footer .list-group-item {
 }
 
 .room {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin: 2rem 0;
 }
 
+.room .card-header {
+  background-color: #2B96C1;
+}
+
+.room h2 .btn-link {
+  color: white;
+  font-size: 1.4rem;
+}
+
 .room td a {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 .schedule {
