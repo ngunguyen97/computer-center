@@ -40,6 +40,16 @@
               </li>
 
             </ul>
+            <span class="navbar-text">
+              <a href="{{ route('cart.index') }}" style="font-size: 1.6rem;">
+                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+              </a>
+              @if (Cart::instance('default')->count() > 0 )
+                <span class="cart-count badge badge-light">{{ Cart::instance('default')->count() }}</span><span></span>
+              @else
+                <span class="cart-count">0</span><span></span>
+              @endif
+            </span>
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
