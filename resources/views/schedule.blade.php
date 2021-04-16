@@ -39,13 +39,19 @@
                 <td>{{ $room->name }}</td>
                 <td>{{ $room->schedule }}</td>
                 <td>{{ presentPrice($room->fee) }}</td>
-                <td>{{ $room->start_day }}
-                  @foreach($room->categories as $category)
-                    {{ $category->name }}
-                  @endforeach
-                </td>
+                <td>{{ $room->start_day }}</td>
                 <td class="text-center">
-                  <a href="{{$room->slug}}" class="btn btn-primary btn-register">Đăng ký</a>
+                  {{--<a href="{{$room->slug}}" class="btn btn-primary btn-register">Đăng ký</a>--}}
+                  <form action="{{ route('cart.store') }}" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id" value="{{ $room->id }}">
+                    <input type="hidden" name="hp_id" value="{{ $room->HP_id }}">
+                    <input type="hidden" name="name" value="{{ $room->name }}">
+                    <input type="hidden" name="description" value="{{ $room->schedule }}">
+                    <input type="hidden" name="fee" value="{{ $room->fee }}">
+                    <input type="hidden" name="start_day" value="{{ $room->start_day }}">
+                    <button type="submit" class="btn btn-primary btn-register">Đăng ký</button>
+                  </form>
                 </td>
               </tr>
               </tbody>
