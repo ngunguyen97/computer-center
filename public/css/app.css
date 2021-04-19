@@ -14210,6 +14210,13 @@ h1.checkout {
   font-size: 1.6rem;
 }
 
+.checkout-section select {
+  padding: 1rem;
+  background-color: transparent;
+  font-size: 1.6rem;
+  height: auto !important;
+}
+
 .checkout-section input#complete-order {
   transition: all 0.5s;
 }

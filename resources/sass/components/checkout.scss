@@ -110,6 +110,13 @@ h1.checkout {
     font-size: 1.6rem;
   }
 
+  select {
+    padding: 1rem;
+    background-color: transparent;
+    font-size: 1.6rem;
+    height: auto !important;
+  }
+
   input#complete-order {
     transition: all 0.5s;
     &:hover {
