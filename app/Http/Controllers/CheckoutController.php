@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
+use App\Order;
+use App\OrderClassroom;
+use App\Student;
+use App\User;
+use Cartalyst\Stripe\Exception\CardErrorException;
+use Cartalyst\Stripe\Laravel\Facades\Stripe;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -14,6 +21,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        if(empty(Cart::count())) {
+          return redirect()->route('homepage');
+        }
         return view('checkout');
     }
 
@@ -32,11 +42,95 @@ class CheckoutController extends Controller
    *
    * @param \App\Http\Requests\CheckoutRequest $request
    *
-   * @return void
+   * @return \Illuminate\Http\Response
    */
     public function store(CheckoutRequest $request)
     {
-      dd($request->all());
+      if($request->payment_types === 'onlinePayment') {
+        try {
+          $charge = $this->submitToStripe($request);
+          if(isset($charge) && !empty($charge)) {
+            $student = $this->exitsStudent($request) ? $this->exitsStudent($request) : $this->addStudentTables($request, 1);
+            $this->addToOrderTables($request, $student, null, 1);
+            return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted.');
+          }
+
+        }catch (CardErrorException $e) {
+          $this->addToOrderTables($request, null, $e->getMessage(), 0);
+          return back()->withErrors('Error!'. $e->getMessage());
+        }
+      }elseif($request->payment_types === 'offlinePayment') {
+        $student = $this->exitsStudent($request) ? $this->exitsStudent($request) : $this->addStudentTables($request, 1);
+        $this->addToOrderTables($request, $student, null, 0);
+        return redirect()->route('confirmation.index')->with('checking_message_via_email', 'Cảm ơn. Quý khách vui lòng kiểm tra thông tin qua email.');
+      }
+
+    }
+
+    private function submitToStripe($request) {
+      $contents = Cart::content()->map(function($item){
+        return $item->model->slug . ', '. $item->qty;
+      })->values()->toJson();
+
+      $amount = $this->getAmount();
+      $charge = Stripe::charges()->create([
+        'amount' => $amount,
+        'currency' => 'VND',
+        'source' => $request->stripeToken,
+        'description' => 'Order',
+        'receipt_email' => $request->email,
+        'metadata' => [
+          'contents' => $contents,
+          'quantity' => Cart::instance('default')->count()
+        ]
+      ]);
+      return $charge;
+    }
+
+    private function  getAmount() {
+      return convertNumberFormatToInteger(Cart::total());
+    }
+
+    private function exitsStudent($request) {
+      return Student::where('id_card', $request->id_card)->first();
+    }
+
+    private function addToOrderTables($request, $student, $error, $status = 0) {
+      $order = Order::create([
+        'student_id' => isset($student) ? $student->id : null,
+        'billing_fullname' => $request->fullname,
+        'billing_id_card' => $request->id_card,
+        'billing_email' => $request->email,
+        'billing_address' => $request->address,
+        'billing_phone' => $request->phone,
+        'billing_selected_object' => $request->selected_object,
+        'payment_types' => $request->payment_types,
+        'billing_name_on_card' => isset($request->name_on_card) ? $request->name_on_card : null,
+        'billing_total' => $this->getAmount(),
+        'status' => $status,
+        'error' => $error
+      ]);
+
+      // Insert into order_product table
+      foreach (Cart::content() as $item) {
+        OrderClassroom::create([
+          'order_id' => $order->id,
+          'classroom_id' => $item->model->id
+        ]);
+      }
+    }
+
+    private function addStudentTables($request, $status = 0) {
+      $student = Student::create([
+        'fullname' => $request->fullname,
+        'id_card' => $request->id_card,
+        'email' => $request->email,
+        'address' => $request->address,
+        'phone' => $request->phone,
+        'selected_object' => $request->selected_object,
+        'status' => $status
+      ]);
+      return $student;
     }
 
     /**
