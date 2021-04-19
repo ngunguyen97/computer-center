@@ -36,6 +36,13 @@
                @endif
              </div> <!--end  full name input -->
              <div class="form-group">
+               <label for="id_card">Chứng minh nhân dân</label>
+               <input type="text" class="form-control" id="id_card" name="id_card" value="{{ old('id_card') }}" />
+               @if($errors->has('id_card'))
+                 <p class="error"> {{ $errors->first('id_card') }}</p>
+               @endif
+             </div> <!--end  full name input -->
+             <div class="form-group">
                <label for="email">Email</label>
                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" />
                @if($errors->has('email'))
@@ -55,19 +62,30 @@
                @if($errors->has('phone'))
                  <p class="error"> {{ $errors->first('phone') }}</p>
                @endif
-             </div> <!--end  address input -->
+             </div> <!--end  phone input -->
+
+             <div class="form-group">
+               <label for="selected_object">Đối tượng</label>
+               <select class="custom-select" name="selected_object">
+                 <option>Chọn đối tượng</option>
+                 <option value="HSSV">Học sinh, sinh viên</option>
+                 <option value="HVC">Học Viên cũ TTTH</option>
+                 <option value="DDL">Đã đi làm</option>
+                 <option value="Another">Khác</option>
+               </select>
+             </div> <!--end  phone input -->
 
              <div class="spacer"></div>
              <h2>Phương thức thanh toán</h2>
              <div class="half-form">
                <div class="form-check">
-                 <input class="form-check-input" type="radio" name="payment" id="onlinePayment" value="onlinePayment" checked>
+                 <input class="form-check-input" type="radio" name="payment_types" id="onlinePayment" value="onlinePayment" checked>
                  <label class="form-check-label" for="onlinePayment">
                    Thanh toán trực tuyến
                  </label>
                </div>
                <div class="form-check">
-                 <input class="form-check-input" type="radio" name="payment" id="offlinePayment" value="offlinePayment">
+                 <input class="form-check-input" type="radio" name="payment_types" id="offlinePayment" value="offlinePayment">
                  <label class="form-check-label" for="offlinePayment">
                    Thanh toán tại trung tâm
                  </label>
@@ -107,25 +125,6 @@
              <input type="submit" id="complete-order" class="button-primary full-width" value="Thanh toán">
            </form>
 
-
-           {{--<div class="form-group">--}}
-             {{--<label for="name">Name on Card</label>--}}
-             {{--<input type="text" class="form-control" id="name_on_card" name="name_on_card" value="{{ old('name_on_card') }}">--}}
-           {{--</div>--}}
-
-           {{--<div class="form-group">--}}
-             {{--<div class="form-row">--}}
-               {{--<label for="card-element">--}}
-                 {{--Credit or debit card--}}
-               {{--</label>--}}
-               {{--<div id="card-element">--}}
-                 {{--<!-- A Stripe Element will be inserted here. -->--}}
-               {{--</div>--}}
-
-               {{--<!-- Used to display form errors. -->--}}
-               {{--<div id="card-errors" role="alert"></div>--}}
-             {{--</div>--}}
-           {{--</div>--}}
          </div>
 
          <div class="checkout-table-container">
