@@ -1,0 +1,54 @@
+.products-section {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin: 80px auto 80px;
+  font-size: 1.6rem;
+  grid-gap: 5rem;
+
+  .list-group-item.active {
+    background-color: #2b96c1;
+    border-color: #2b96c1;
+
+    a {
+      color: white;
+    }
+  }
+
+  a {
+    color: #1b1e21;
+  }
+
+  .my-profile {
+
+    label {
+      display: block;
+    }
+
+    .form-control {
+      margin-bottom: 30px;
+      height: auto;
+      background-color: transparent;
+      border: none;
+    }
+
+
+    input {
+      border: 1px solid $text-color-light;
+      padding: 13px 10px;
+      border-radius: 5px;
+      width: 66.6%;
+      font-size: 14px;
+    }
+
+    .my-profile-button {
+      background: $text-color;
+      color: $white;
+      border-radius: 5px;
+      padding: 12px 50px;
+
+      &:hover {
+        background: lighten($text-color, 10%);
+      }
+    }
+  }
+}

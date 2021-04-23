@@ -28,12 +28,54 @@ Route::get('/empty', function (){
   Cart::instance('default')->destroy();
 });
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmationMail;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
-Auth::routes();
+Route::get('/email', function (){
+  $product =  Cart::content()->map(function ($item) {
+    return $item->model;
+  });
+  //dd($product);
+  $object = (object) [
+    'fullname' => 'Van Teo',
+    'id_card' => '123456789',
+    'address' => 'ABC Street',
+    'phone' => '0356446995'
+  ];
+  Mail::to('email@email.com')->send(new ConfirmationMail($object, $product));
+  return new \App\Mail\ConfirmationMail($object, $product);
+});
+
+
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+});
+
+
+Route::prefix('/student')->name('student.')->namespace('Student')->group(function () {
+  Route::namespace('Auth')->group(function(){
+
+    //Login Routes
+    Route::get('/login','LoginController@showLoginForm')->name('login');
+    Route::post('/login','LoginController@login');
+    Route::post('/logout','LoginController@logout')->name('logout');
+
+    //Forgot Password Routes
+    Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+
+    //Reset Password Routes
+    Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+
+  });
+
+  Route::get('/my-profile','StudentController@edit')->name('edit');
+  Route::PATCH('/my-profile', 'StudentController@update')->name('update');
 });
