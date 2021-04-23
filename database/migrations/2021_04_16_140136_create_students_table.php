@@ -17,11 +17,13 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->string('fullname');
             $table->integer('id_card');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->string('address');
             $table->string('phone');
             $table->string('selected_object');
             $table->boolean('status')->default(0);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
