@@ -10,13 +10,16 @@
 @import "~bootstrap/scss/bootstrap";
 
 // Components
+@import "components/auth";
 @import "components/cart";
 @import "components/checkout";
 @import "components/footer";
 @import "components/header";
+@import "components/my-profile";
 @import "components/news";
 @import "components/room";
 @import "components/schedule";
+@import "components/thankyou";
 
 @import "base";
 @import "helper";

@@ -13985,6 +13985,85 @@ a.text-dark:focus {
   }
 }
 
+.auth-pages {
+  margin: 100px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 100px;
+  min-height: 60vh;
+  font-size: 1.6rem;
+}
+
+.auth-pages .student-card-header {
+  font-weight: bold;
+}
+
+.auth-pages input {
+  border: 1px solid #919191;
+  padding: 16px 10px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 30px;
+  height: calc(2.5em + 0.75rem + 2px);
+  background-color: transparent;
+}
+
+.auth-pages input[type=checkbox] {
+  width: auto;
+  height: auto;
+}
+
+.auth-pages .login-container {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.auth-pages .auth-button {
+  background-color: #2b96c1;
+  color: #e9e9e9;
+  border-radius: 5px;
+  padding: 12px 50px;
+  font-size: 1.4rem;
+  border-color: #2b96c1;
+}
+
+.auth-pages .auth-button:hover {
+  background: #3b3b3b;
+}
+
+.auth-pages .auth-button-hollow {
+  background: white;
+  color: #212121;
+  border-radius: 5px;
+  border: 1px solid #212121;
+  padding: 12px 50px;
+}
+
+.auth-pages .auth-button-hollow:hover {
+  background: #212121;
+  color: #e9e9e9;
+}
+
+.auth-pages .form-check {
+  display: flex;
+}
+
+.auth-pages .form-check .form-check-label {
+  margin-left: 10px;
+  margin-top: -2px;
+}
+
+.auth-pages .auth-right {
+  border-left: 1px solid #CDCDCD;
+  padding-left: 100px;
+}
+
+.auth-pages .auth-right h2 {
+  font-weight: bold;
+}
+
 .cart-section {
   font-size: 1.4rem;
   display: grid;
@@ -14345,6 +14424,57 @@ footer .list-group-item {
   overflow: hidden;
 }
 
+.products-section {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin: 80px auto 80px;
+  font-size: 1.6rem;
+  grid-gap: 5rem;
+}
+
+.products-section .list-group-item.active {
+  background-color: #2b96c1;
+  border-color: #2b96c1;
+}
+
+.products-section .list-group-item.active a {
+  color: white;
+}
+
+.products-section a {
+  color: #1b1e21;
+}
+
+.products-section .my-profile label {
+  display: block;
+}
+
+.products-section .my-profile .form-control {
+  margin-bottom: 30px;
+  height: auto;
+  background-color: transparent;
+  border: none;
+}
+
+.products-section .my-profile input {
+  border: 1px solid #919191;
+  padding: 13px 10px;
+  border-radius: 5px;
+  width: 66.6%;
+  font-size: 14px;
+}
+
+.products-section .my-profile .my-profile-button {
+  background: #212121;
+  color: #e9e9e9;
+  border-radius: 5px;
+  padding: 12px 50px;
+}
+
+.products-section .my-profile .my-profile-button:hover {
+  background: #3b3b3b;
+}
+
 .news .card--medium {
   height: 38rem;
   overflow: hidden;
@@ -14407,6 +14537,25 @@ footer .list-group-item {
 .schedule .card-title {
   font-size: 2rem;
   font-weight: 600;
+}
+
+.thank-you-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  flex: 1;
+  height: 69vh;
+  font-size: 1.6rem;
+}
+
+.thank-you-section h1 {
+  margin-bottom: 10px;
+}
+
+.thank-you-section .button {
+  color: #2b96c1;
 }
 
 html {
