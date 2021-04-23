@@ -16,7 +16,8 @@ class ConfirmationController extends Controller
       if(session()->has('success_message') || session()->has('checking_message_via_email') ) {
         return view('thankyou');
       }
-      return redirect('/');
+      return view('thankyou');
+      //return redirect('/');
     }
 
     /**

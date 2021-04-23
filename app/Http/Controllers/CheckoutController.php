@@ -11,9 +11,11 @@ use Cartalyst\Stripe\Exception\CardErrorException;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CheckoutController extends Controller
 {
+    const DEFAULT_PASSWORD = '123456789';
     /**
      * Display a listing of the resource.
      *
@@ -52,6 +54,7 @@ class CheckoutController extends Controller
           if(isset($charge) && !empty($charge)) {
             $student = $this->exitsStudent($request) ? $this->exitsStudent($request) : $this->addStudentTables($request, 1);
             $this->addToOrderTables($request, $student, null, 1);
+            Cart::instance('default')->destroy();
             return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted.');
           }
 
@@ -60,8 +63,9 @@ class CheckoutController extends Controller
           return back()->withErrors('Error!'. $e->getMessage());
         }
       }elseif($request->payment_types === 'offlinePayment') {
-        $student = $this->exitsStudent($request) ? $this->exitsStudent($request) : $this->addStudentTables($request, 1);
+        $student = $this->exitsStudent($request) ? $this->exitsStudent($request) : $this->addStudentTables($request, 0);
         $this->addToOrderTables($request, $student, null, 0);
+        Cart::instance('default')->destroy();
         return redirect()->route('confirmation.index')->with('checking_message_via_email', 'Cảm ơn. Quý khách vui lòng kiểm tra thông tin qua email.');
       }
 
@@ -121,10 +125,12 @@ class CheckoutController extends Controller
     }
 
     private function addStudentTables($request, $status = 0) {
+
       $student = Student::create([
         'fullname' => $request->fullname,
         'id_card' => $request->id_card,
         'email' => $request->email,
+        'password' => Hash::make(self::DEFAULT_PASSWORD),
         'address' => $request->address,
         'phone' => $request->phone,
         'selected_object' => $request->selected_object,

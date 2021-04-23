@@ -44,7 +44,7 @@
                   <td>{{ $item->options->hp_id }}</td>
                   <td>{{ $item->options->description }}</td>
                   <td>{{ Cart::total() }} <span class="cart-currency">đ</span></td>
-                  <td>{{ $item->options->description }}</td>
+                  <td>{{ parseDate($item->options->start_day) }}</td>
                   <td>
                     <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
                       {{ csrf_field() }}
