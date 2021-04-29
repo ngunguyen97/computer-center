@@ -4,6 +4,27 @@
 
 @section('content')
   <div class="my-profile-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-2 mt-5" style="font-size: 1.6rem;">
+          @if (session()->has('success_message'))
+            <div class="alert alert-success">
+              {{ session()->get('success_message') }}
+            </div>
+          @endif
+
+          @if(count($errors) > 0)
+            <div class="alert alert-danger">
+              <ul >
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+        </div>
+      </div>
+    </div>
     <div class="products-section container">
       <div class="sidebar list-group list-group-flush">
         <ul>
@@ -23,7 +44,7 @@
             {{ csrf_field() }}
 
             <div class="form-control">
-              <input id="name" type="text" name="name" value="{{ old('fullname', $user->fullname) }}" placeholder="Name" required>
+              <input id="fullname" type="text" name="fullname" value="{{ old('fullname', $user->fullname) }}" placeholder="Name" required>
             </div>
             <div class="form-control">
               <input id="email" type="email" name="email" value="{{ old('email', $user->email) }}" placeholder="Email" required>

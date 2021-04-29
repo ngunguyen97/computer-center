@@ -73,9 +73,27 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+      $request->validate([
+        'fullname' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:students,email,'.auth()->id(),
+        'password' => 'sometimes|nullable|string|min:6|confirmed',
+      ]);
+
+      $user = auth()->user();
+      $input = $request->except('password', 'password_confirmation');
+
+      if(! $request->filled('password')) {
+        $user->fill($input)->save();
+
+        return back()->with('success_message', 'Profile updated successfully');
+      }
+
+      $user->password = bcrypt($request->password);
+      $user->fill($input)->save();
+
+      return back()->with('success_message', 'Profile (and password) updated successfully');
     }
 
     /**
