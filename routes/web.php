@@ -54,8 +54,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+
+  Route::namespace('Voyager')->group(function() {
+
+     Route::group(['middleware' => 'admin.user'], function () {
+       Route::get('/add-grades', 'GradeController@index')->name('grade.index');
+       Route::post('/add-grades', 'GradeController@store')->name('grade.store');
+     });
+   });
+  Voyager::routes();
 });
+
+Route::get('/test-case', 'CheckoutController@addStudentToGradeTables');
 
 
 Route::prefix('/student')->name('student.')->namespace('Student')->group(function () {
@@ -78,4 +88,5 @@ Route::prefix('/student')->name('student.')->namespace('Student')->group(functio
 
   Route::get('/my-profile','StudentController@edit')->name('edit');
   Route::PATCH('/my-profile', 'StudentController@update')->name('update');
+  Route::get('/checkpoint/{user}','CheckpointController@show')->name('checkpoint.show');
 });

@@ -25,16 +25,17 @@
         </div>
       </div>
     </div>
-    <div class="products-section container">
+    <div class="products-section container-fluid">
       <div class="sidebar list-group list-group-flush">
         <ul>
-          <li class="active list-group-item"><a href="{{ route('student.edit') }}">My Profile</a></li>
-          <li class="list-group-item"><a href="#">My Orders</a></li>
+          <li class="active list-group-item"><a href="{{ route('student.edit') }}">Hồ sơ</a></li>
+          <li class="list-group-item"><a href="#">Phiếu Đăng Ký</a></li>
+          <li class="list-group-item"><a href="{{ route('student.checkpoint.show', ['user' => Auth::guard('student')->user()->id ]) }}">Xem Điểm</a></li>
         </ul>
       </div> <!-- End Sidebar -->
       <div class="my-profile">
         <div class="products-header">
-          <h1 class="stylish-heading">My Profile</h1>
+          <h1 class="stylish-heading">Hồ sơ</h1>
         </div>
 
         <div>
@@ -57,7 +58,7 @@
               <input id="password-confirm" type="password" name="password_confirmation" placeholder="Confirm Password">
             </div>
             <div>
-              <button type="submit" class="my-profile-button">Update Profile</button>
+              <button type="submit" class="my-profile-button">Cập nhật</button>
             </div>
           </form>
         </div>

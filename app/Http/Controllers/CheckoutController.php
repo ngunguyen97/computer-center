@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Grade;
 use App\Http\Requests\CheckoutRequest;
 use App\Order;
 use App\OrderClassroom;
@@ -65,6 +66,7 @@ class CheckoutController extends Controller
       }elseif($request->payment_types === 'offlinePayment') {
         $student = $this->exitsStudent($request) ? $this->exitsStudent($request) : $this->addStudentTables($request, 0);
         $this->addToOrderTables($request, $student, null, 0);
+        $this->addStudentToGradeTables($student);
         Cart::instance('default')->destroy();
         return redirect()->route('confirmation.index')->with('checking_message_via_email', 'Cảm ơn. Quý khách vui lòng kiểm tra thông tin qua email.');
       }
@@ -137,6 +139,101 @@ class CheckoutController extends Controller
         'status' => $status
       ]);
       return $student;
+    }
+
+    private function addStudentToGradeTables($student) {
+      $studentId = $student->id;
+      $classroom_id = $this->getClassroomId();
+      $test_sore = $this->checkHPType();
+      Grade::create([
+        'classroom_id' => $classroom_id,
+        'student_id' => $studentId,
+        'attendance' => null,
+        'test_score' => $test_sore
+      ]);
+    }
+
+    private function checkHPType() {
+      foreach (Cart::content() as $item) {
+        $item->model->HP_id;
+        if(str_contains($item->model->HP_id, 'THVP')) {
+          return $this->GradeTHVPType();
+        }else {
+          return $this->GradeAnotherType();
+        }
+      }
+    }
+
+    private function getClassroomId() {
+      $classroom = null;
+      foreach (Cart::content() as $item) {
+        $classroom = $item->model->id;
+      }
+      return $classroom;
+    }
+
+    private function GradeAnotherType() {
+      $arrAnotherType = array(
+        "classroom_id" => null,
+        "student_id" => null,
+        "grades" => [
+          "theory" => [
+            "first_time" => null,
+            "second_time" => null,
+
+          ],
+          "practice" => [
+            "first_time" => null,
+            "second_time" => null,
+          ],
+          "classification" => [
+            "first_time" => null,
+            "second_time" => null
+          ],
+          "note" => [
+            "value" => null
+          ]
+        ]
+      );
+      $arrAnotherType = json_encode($arrAnotherType);
+      return $arrAnotherType;
+    }
+
+    private function GradeTHVPType() {
+      $type = array(
+        "classroom_id" => null,
+        "student_id" => null,
+        "grades" => [
+          "theory" => [
+            "first_time" => null,
+            "second_time" => null,
+
+          ],
+          "practice" => [
+            "word" => [
+              "first_time" => null,
+              "second_time" => null,
+            ],
+            "excel" => [
+              "first_time" => null,
+              "second_time" => null,
+            ],
+            "powerpoint" => [
+              "first_time" => null,
+              "second_time" => null,
+            ]
+          ],
+          "classification" => [
+            "first_time" => null,
+            "second_time" => null
+          ],
+          "note" => [
+            "value" => null
+          ]
+        ]
+      );
+      $type = json_encode($type);
+      return $type;
     }
 
     /**

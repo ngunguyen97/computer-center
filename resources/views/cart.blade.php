@@ -62,7 +62,7 @@
         </div> <!-- end cart-table -->
         <div class="cart-action-row">
           <div class="cart-buttons">
-            <a href="{{ route('checkout.index') }}" class="button-primary">Proceed to Checkout</a>
+            <a href="{{ route('checkout.index') }}" class="button-primary">Tiến Hành Thanh Toán</a>
           </div>
         </div>
       @else
