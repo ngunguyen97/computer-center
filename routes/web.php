@@ -89,4 +89,6 @@ Route::prefix('/student')->name('student.')->namespace('Student')->group(functio
   Route::get('/my-profile','StudentController@edit')->name('edit');
   Route::PATCH('/my-profile', 'StudentController@update')->name('update');
   Route::get('/checkpoint/{user}','CheckpointController@show')->name('checkpoint.show');
+  Route::get('/review-test-scores','ReviewTestScoreController@index')->name('review.index');
+  Route::post('/review-test-scores/{user}', 'ReviewTestScoreController@store')->name('review.store');
 });

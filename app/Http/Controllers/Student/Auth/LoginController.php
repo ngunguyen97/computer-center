@@ -54,7 +54,7 @@ class LoginController extends Controller
     Auth::guard('student')->logout();
     return redirect()
       ->route('homepage')
-      ->with('status','Admin has been logged out!');
+      ->with('status','Student has been logged out!');
   }
 
   /**

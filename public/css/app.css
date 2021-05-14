@@ -14558,6 +14558,11 @@ footer .list-group-item {
   color: #2b96c1;
 }
 
+.my-profile-section .review-test-scores .form-control,
+.my-profile-section .review-test-scores .my-review-button {
+  font-size: 1.4rem;
+}
+
 html {
   box-sizing: border-box;
   font-size: 62.5%;
