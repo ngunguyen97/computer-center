@@ -19,7 +19,7 @@ class CreateGradesTable extends Migration
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onUpdate('cascade')->onDelete('set null');
             $table->integer('student_id')->unsigned()->nullable();
             $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade')->onDelete('set null');
-            $table->string('attendance')->nullable();
+            $table->text('attendance')->nullable();
             $table->text('test_score')->nullable();
             $table->integer('room_id')->unsigned()->nullable();
             $table->foreign('room_id')->references('id')->on('rooms')->onUpdate('cascade')->onDelete('set null');
