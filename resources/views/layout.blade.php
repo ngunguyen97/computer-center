@@ -21,9 +21,9 @@
       @include('partials.footer')
 
       {{-- @include('partials.footer') --}}
+      <script src="{{ asset('js/app.js')}}"></script>
 
       @yield('extra-js')
 
-    <script src="{{ asset('js/app.js')}}"></script>
     </body>
 </html>

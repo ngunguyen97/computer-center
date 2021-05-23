@@ -3,6 +3,8 @@
 @section('title', 'Thanh toán')
 
 @section('extra-css')
+  {{--https://www.google.com/recaptcha/admin/site/450618043/setup--}}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://js.stripe.com/v3/"></script>
 @endsection
 
@@ -66,7 +68,7 @@
 
              <div class="form-group">
                <label for="selected_object">Đối tượng</label>
-               <select class="custom-select" name="selected_object">
+               <select class="custom-select" name="selected_object" required>
                  <option>Chọn đối tượng</option>
                  <option value="HSSV">Học sinh, sinh viên</option>
                  <option value="HVC">Học Viên cũ TTTH</option>
@@ -121,6 +123,14 @@
                 </ul>
               </div>
             </div>
+
+             <div class="form-group">
+               <div class="g-recaptcha" data-sitekey="{{config('services.recaptcha.key')}}"></div>
+               @if($errors->has('g-recaptcha-response'))
+                 <p class="error"> {{ $errors->first('g-recaptcha-response') }}</p>
+               @endif
+             </div>
+
              <div class="spacer"></div>
              <input type="submit" id="complete-order" class="button-primary full-width" value="Thanh toán">
            </form>

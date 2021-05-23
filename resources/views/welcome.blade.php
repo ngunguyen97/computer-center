@@ -16,7 +16,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-3">
+                      <a href="{{ url('/')}}">
                     <img src="{{asset('logo.png')}}" alt="Logo" style="width: 70%;" class="logo-desktop">
+                      </a>
                     </div>
                 </div>
             </div>
@@ -47,26 +49,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                              Chương trình đào tạo
-                            </a>
+                          <a class="nav-link" href="{{ route('posts.index') }}">
+                            Tin Tức và Sự Kiện
+                          </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                              Tin Tức
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                              Liên Hệ
-                            </a>
+                          <a class="nav-link" href="#">
+                            Liên Hệ
+                          </a>
                         </li>
 
                       </ul>
-                      <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
-                      </form>
                     </div>
                 </nav>
             </div>
