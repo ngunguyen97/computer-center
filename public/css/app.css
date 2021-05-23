@@ -14384,6 +14384,56 @@ footer .list-group-item {
   font-size: 1.4rem;
 }
 
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content {
+  height: auto;
+}
+
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event {
+  margin-bottom: 1.7rem;
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
+
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content {
+  white-space: normal;
+  padding: 1rem;
+}
+
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content .fc-time,
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content .fc-title,
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content__teacher,
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content__time,
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content__room,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content .fc-time,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content .fc-title,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content__teacher,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content__time,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content__room {
+  display: block;
+  color: #003763;
+  font-size: 1.3rem;
+}
+
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content .fc-time,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content .fc-time {
+  display: none;
+}
+
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content .fc-title,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content .fc-title {
+  font-weight: bold;
+  padding-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+#scheduler .fc-month-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content__time,
+#scheduler .fc-basicWeek-view .fc-widget-content .fc-widget-content .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content__time {
+  font-weight: bold;
+}
+
 @media (max-width: 576px) {
   .navbar-brand {
     flex: 1;
@@ -14537,6 +14587,28 @@ footer .list-group-item {
 .schedule .card-title {
   font-size: 2rem;
   font-weight: 600;
+}
+
+.sidebar .list-group-item .btn-link {
+  font-size: 1.6rem;
+  color: #000000;
+}
+
+.sidebar .list-group-item .btn-link:hover {
+  text-decoration: none;
+}
+
+.sidebar .list-group-item .btn-link:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.sidebar .list-group-item .card-body {
+  border: none;
+}
+
+.sidebar .list-group-item .card-body ul {
+  padding-left: 0;
 }
 
 .thank-you-section {

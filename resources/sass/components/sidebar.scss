@@ -1,0 +1,24 @@
+.sidebar {
+    .list-group-item {
+      .btn-link {
+        font-size: 1.6rem;
+        color: #000000;
+
+        &:hover {
+          text-decoration: none;
+        }
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+      .card-body {
+        border: none;
+
+        ul {
+          padding-left: 0;
+        }
+      }
+    }
+}

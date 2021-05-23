@@ -1,0 +1,40 @@
+#scheduler {
+  .fc-month-view, .fc-basicWeek-view {
+    .fc-widget-content{
+      .fc-widget-content {
+        height: auto;
+        .fc-content-skeleton {
+          .fc-event-container {
+            .fc-day-grid-event{
+              margin-bottom: 1.7rem;
+              margin-left: 0.7rem;
+              margin-right: 0.7rem;
+
+              .fc-content {
+                white-space: normal;
+                padding: 1rem;
+
+                .fc-time,.fc-title,&__teacher, &__time, &__room {
+                  display: block;
+                  color: #003763;
+                  font-size: 1.3rem;
+                }
+                .fc-time {
+                  display: none;
+                }
+                .fc-title {
+                  font-weight: bold;
+                  padding-bottom: 1rem;
+                  font-size: 1.4rem;
+                }
+                &__time {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
