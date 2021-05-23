@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Classroom;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -15,8 +16,20 @@ class ScheduleController extends Controller
    */
   public function index()
   {
-    $rooms = Classroom::with('categories')->where('status', true)->get();
+    $rooms = Classroom::with('categories')
+                      ->where('status', true)
+                      ->get();
     $categories = Category::all();
+
+    $rooms = $rooms->filter(function ($item) {
+      $nowDate =  Carbon::now();
+      $startDate = Carbon::createFromFormat('Y-m-d',$item->start_day);
+      $endDate = Carbon::createFromFormat('Y-m-d',$item->end_day);
+      //dd($nowDate->between($startDate, $endDate));
+      if($nowDate->between($startDate, $endDate)) {
+        return $item;
+      }
+    });
 
     return view('schedule')->with(compact('rooms', 'categories'));
   }

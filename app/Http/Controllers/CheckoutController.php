@@ -55,8 +55,9 @@ class CheckoutController extends Controller
           if(isset($charge) && !empty($charge)) {
             $student = $this->exitsStudent($request) ? $this->exitsStudent($request) : $this->addStudentTables($request, 1);
             $this->addToOrderTables($request, $student, null, 1);
+            $this->addStudentToGradeTables($student);
             Cart::instance('default')->destroy();
-            return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted.');
+            return redirect()->route('confirmation.index')->with('success_message', 'Cảm ơn bạn! Thanh toán của bạn đã được chấp nhận thành công.');
           }
 
         }catch (CardErrorException $e) {

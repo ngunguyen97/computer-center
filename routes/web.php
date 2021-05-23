@@ -16,6 +16,8 @@ Route::get('/', function () {
 })->name('homepage');
 
 Route::get('/lich-khai-giang', 'ScheduleController@index')->name('schedule.index');
+Route::get('/posts', 'PostController@index')->name('posts.index');
+Route::get('/posts/{slug}', 'PostController@show')->name('post.show');
 Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart', 'CartController@store')->name('cart.store');
 Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
@@ -57,15 +59,19 @@ Route::group(['prefix' => 'admin'], function () {
 
   Route::namespace('Voyager')->group(function() {
 
-     Route::group(['middleware' => 'admin.user'], function () {
+    Route::group(['middleware' => 'admin.user'], function () {
        Route::get('/add-grades', 'GradeController@index')->name('grade.index');
        Route::post('/add-grades', 'GradeController@store')->name('grade.store');
+      Route::get('/calendar','CalendarController@index')->name('calendar.index');
+      Route::get('/retest_schedule', 'RetestScheduleController@index')->name('retest.index');
+      Route::get('/attendance/{classroom}', 'AttendanceController@show')->name('attendance.show');
+      Route::post('/attendance/{classroom}', 'AttendanceController@update')->name('attendance.update');
      });
    });
   Voyager::routes();
 });
 
-Route::get('/test-case', 'CheckoutController@addStudentToGradeTables');
+Route::get('/test-case', 'AttendanceController@index');
 
 
 Route::prefix('/student')->name('student.')->namespace('Student')->group(function () {
@@ -91,4 +97,9 @@ Route::prefix('/student')->name('student.')->namespace('Student')->group(functio
   Route::get('/checkpoint/{user}','CheckpointController@show')->name('checkpoint.show');
   Route::get('/review-test-scores','ReviewTestScoreController@index')->name('review.index');
   Route::post('/review-test-scores/{user}', 'ReviewTestScoreController@store')->name('review.store');
+  Route::get('/full-calendar','StudentCalendarController@index')->name('calendar.index');
+  Route::get('/re-examination', 'ReexaminationController@index')->name('reexamination.index');
+  Route::post('/re-examination/{classroom}', 'ReexaminationController@getData')->name('reexamination.getData');
+  Route::post('/re-examination', 'ReexaminationController@store')->name('reexamination.store');
+  Route::get('/re-examination/schedule', 'ReexaminationController@show')->name('reexamination.show');
 });

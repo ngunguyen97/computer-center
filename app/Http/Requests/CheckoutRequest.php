@@ -28,7 +28,8 @@ class CheckoutRequest extends FormRequest
           'fullname' => 'required',
           'id_card' => 'required|regex:/[0-9]{9}/',
           'address' => 'required',
-          'phone' => 'required|regex:/(0)[0-9]{9}/'
+          'phone' => 'required|regex:/(0)[0-9]{9}/',
+          'g-recaptcha-response' => 'required'
         ];
     }
 
@@ -40,7 +41,8 @@ class CheckoutRequest extends FormRequest
         'phone.required' => 'Vui lòng nhập số điện thoại',
         'phone.regex' => 'Số điện thoại không hơp lệ.',
         'id_card.required' => 'Vui lòng nhập chứng minh nhân dân',
-        'id_card.regex' => 'Chứng minh thư không hợp lệ'
+        'id_card.regex' => 'Chứng minh thư không hợp lệ',
+        'g-recaptcha-response.required' => 'Recaptcha không hợp lệ'
       ];
     }
 }
