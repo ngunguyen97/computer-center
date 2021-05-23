@@ -63,9 +63,9 @@ class CheckpointController extends Controller
           ->select('grades.test_score','grades.student_id', 'classrooms.HP_id', 'classrooms.name')
           ->orWhere('classrooms.HP_id', 'NOT LIKE', '%THVP%')
           ->where('grades.student_id', $id);
-      $anotherType = $anotherType->count() > 0 ? $anotherType->get() : null;
-      $officeComputing = $officeComputing->count() > 0 ? $officeComputing->get() : null;
-      //dd($anotherType);
+      $anotherType = $anotherType->get();
+      $officeComputing = $officeComputing->get();
+      //dd($officeComputing);
 
       return view('student.checkpoint', compact('officeComputing', 'anotherType'));
     }

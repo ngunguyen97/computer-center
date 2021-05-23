@@ -6,17 +6,12 @@
   <div class="my-profile-section">
     <div class="products-section container-fluid">
       <div class="sidebar list-group list-group-flush">
-        <ul>
-          <li class="list-group-item"><a href="{{ route('student.edit') }}">Hồ sơ</a></li>
-          <li class="list-group-item"><a href="#">Phiếu Đăng Ký</a></li>
-          <li class="active list-group-item"><a href="{{ route('student.checkpoint.show', ['user' => Auth::guard('student')->user()->id ]) }}">Xem Điểm</a></li>
-          <li class="list-group-item"><a href="{{ route('student.review.index') }}">Phúc Khảo</a></li>
-        </ul>
+        @include('partials.menus.sidebar-left')
       </div> <!-- End Sidebar -->
 
       <div class="my-checkpoint">
         <div class="show-grades">
-          @if(!empty($officeComputing))
+          @if($officeComputing->count() > 0 )
             <div class="THVP-grade-type">
               <table id="THVPtable" class="table table-bordered table-striped fs-14 text-center" cellpadding="2" cellspacing="0">
                 <thead>
@@ -100,7 +95,7 @@
             </div>
           @endif
             <div class="spacer"></div>
-            @if(!empty($anotherType))
+            @if(!empty($anotherType) && $anotherType->count() > 0 )
             <div class="another-grade-type">
               <table id="anotherGradeType" class="table table-bordered table-striped fs-14 text-center" cellpadding="2" cellspacing="0">
                 <thead>

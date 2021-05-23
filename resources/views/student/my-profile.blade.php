@@ -27,12 +27,7 @@
     </div>
     <div class="products-section container-fluid">
       <div class="sidebar list-group list-group-flush">
-        <ul>
-          <li class="active list-group-item"><a href="{{ route('student.edit') }}">Hồ sơ</a></li>
-          <li class="list-group-item"><a href="#">Phiếu Đăng Ký</a></li>
-          <li class="list-group-item"><a href="{{ route('student.checkpoint.show', ['user' => Auth::guard('student')->user()->id ]) }}">Xem Điểm</a></li>
-          <li class="list-group-item"><a href="{{ route('student.review.index') }}">Phúc Khảo</a></li>
-        </ul>
+        @include('partials.menus.sidebar-left')
       </div> <!-- End Sidebar -->
       <div class="my-profile">
         <div class="products-header">
