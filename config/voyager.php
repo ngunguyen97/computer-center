@@ -193,7 +193,9 @@ return [
     ],
 
     'additional_js' => [
-        'js/custom.js',
+      'js/tinymce.js',
+      'libs/calendar/js/fullcalendar.min.js',
+      'js/custom.js',
     ],
 
     'googlemaps' => [
