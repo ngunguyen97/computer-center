@@ -91,7 +91,30 @@ class ClassroomsController extends VoyagerBaseController {
       if ($search->value != '' && $search->key && $search->filter) {
         $search_filter = ($search->filter == 'equals') ? '=' : 'LIKE';
         $search_value = ($search->filter == 'equals') ? $search->value : '%'.$search->value.'%';
-        $query->where($search->key, $search_filter, $search_value);
+        $isRelation = false;
+        $relationshipIds = [];
+
+        foreach ($dataType->browseRows as $key => $row) {
+          if ($row->type === 'relationship' &&
+            $row->details->type === 'belongsTo' &&
+            $row->details->column === $search->key
+          ) {
+
+            $relationshipIds = DB::table($row->details->table)
+              ->select($row->details->key, $row->details->label)
+              ->where($row->details->label, $search_filter, $search_value)
+              ->pluck($row->details->key)
+              ->toArray();
+
+            $isRelation = true;
+          }
+        }
+
+        if($isRelation) {
+          $query->whereIn($search->key, $relationshipIds);
+        } else {
+          $query->where($search->key, $search_filter, $search_value);
+        }
       }
 
       if ($orderBy && in_array($orderBy, $dataType->fields())) {
