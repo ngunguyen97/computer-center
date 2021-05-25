@@ -42,7 +42,7 @@
         <thead>
         <tr>
           <th rowspan="2">Mã số sinh viên</th>
-          <th rowspan="2" >Họ và tên</th>
+          <th rowspan="2" style="width: 17%;">Họ và tên</th>
           <th rowspan="2" style="width: 15%;">Địa Chỉ</th>
           <th colspan="2" scope="colgroup" style="text-align: center;">Lý Thuyết</th>
           <th colspan="2" scope="colgroup" style="text-align: center;">Win_Word</th>
@@ -74,20 +74,21 @@
 
                 @if(!empty($row->test_score))
                   @foreach(json_decode($row->test_score, true) as $score_key => $value)
-                    <td class="w-60">
-                      @if(!empty($value["first_time"]))
-                        <input type="number" name="items[{{$key}}][grades][{{$score_key}}][first_time]" min="0" max="10" value="{{ $value["first_time"] }}" class="w-auto">
-                      @else
-                        <input type="number" name="items[{{$key}}][grades][{{$score_key}}][first_time]" min="0" max="10" value="" class="w-auto">
-                      @endif
-                    </td>
-                    <td class="w-60">
-                      @if(!empty($value["second_time"]))
-                        <input type="number" name="items[{{$key}}][grades][{{$score_key}}][second_time]" min="0" max="10" value="{{ $value["second_time"] }}" class="w-auto">
-                      @else
-                        <input type="number" name="items[{{$key}}][grades][{{$score_key}}][second_time]" min="0" max="10" value="" class="w-auto">
-                      @endif
-                    </td>
+                    @if($score_key === "classification" || $score_key === "note")
+                      <td style="width: 25rem;">
+                        <input type="text" name="items[{{$key}}][grades][{{$score_key}}][first_time]" min="0" max="10" value="{{$value["first_time"]}}" class="w-auto">
+                      </td>
+                      <td style="width: 25rem;">
+                        <input type="text" name="items[{{$key}}][grades][{{$score_key}}][second_time]" min="0" max="10" value="{{$value["second_time"]}}" class="w-auto">
+                      </td> <!-- Theory -->
+                    @else
+                      <td style="width: 25rem;">
+                        <input type="number" name="items[{{$key}}][grades][{{$score_key}}][first_time]" min="0" max="10" value="{{$value["first_time"]}}" class="w-auto">
+                      </td>
+                      <td style="width: 25rem;">
+                        <input type="number" name="items[{{$key}}][grades][{{$score_key}}][second_time]" min="0" max="10" value="{{$value["second_time"]}}" class="w-auto">
+                      </td> <!-- Theory -->
+                    @endif
                   @endforeach
                 @else
                 <td class="w-60">

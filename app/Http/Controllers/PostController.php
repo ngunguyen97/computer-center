@@ -33,16 +33,20 @@ class PostController extends Controller
         return view('post', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+  public function getDownload($slug)
+  {
+    $item = Post::where('slug', '=', $slug)->firstOrFail();
+
+    if($item->count()) {
+      $path = json_decode($item->meta_description, true)[0]["download_link"];
+      $name = json_decode($item->meta_description, true)[0]["original_name"];
+      //PDF file is stored under project/public/download/info.pdf
+      $file= public_path('storage/'. $path);
+
+      return response()->download($file, $name);
     }
+
+  }
 
     /**
      * Update the specified resource in storage.

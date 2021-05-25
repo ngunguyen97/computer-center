@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/lich-khai-giang', 'ScheduleController@index')->name('schedule.index');
 Route::get('/posts', 'PostController@index')->name('posts.index');
 Route::get('/posts/{slug}', 'PostController@show')->name('post.show');
+Route::get('/posts/download/{slug}', 'PostController@getDownload')->name('post.download');
 Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart', 'CartController@store')->name('cart.store');
 Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
@@ -70,11 +71,6 @@ Route::group(['prefix' => 'admin'], function () {
    });
   Voyager::routes();
 });
-Route::get('/view-case', 'DocumentController@index')->name('file.index');
-Route::get('/test-case', 'DocumentController@create')->name('file.create');
-Route::post('/test-case', 'DocumentController@store')->name('file.store');
-Route::get('/download/{slug}','DocumentController@getDownload')->name('file.download');
-
 
 Route::prefix('/student')->name('student.')->namespace('Student')->group(function () {
   Route::namespace('Auth')->group(function(){
@@ -104,7 +100,8 @@ Route::prefix('/student')->name('student.')->namespace('Student')->group(functio
   Route::post('/re-examination/{classroom}', 'ReexaminationController@getData')->name('reexamination.getData');
   Route::post('/re-examination', 'ReexaminationController@store')->name('reexamination.store');
   Route::get('/re-examination/schedule', 'ReexaminationController@show')->name('reexamination.show');
+  Route::get('/download/documents', 'DocumentController@index')->name('document.index');
+  Route::get('/download/{slug}','DocumentController@getDownload')->name('document.download');
+
 });
 
-// storage link
-//ln -sr storage/app/public public/storage
