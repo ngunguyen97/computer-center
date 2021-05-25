@@ -30,6 +30,9 @@ class CalendarController extends Controller
         'classrooms.HP_id',
         DB::raw('CONCAT(classrooms.name, " - ", classrooms.HP_id) AS title'))
       ->where('teachers.user_id', $user->id)
+      ->whereIn('class_schedules.classroom_id', function($query) {
+        $query->select('classroom_id')->from('grades');
+      })
       ->get();
     $newData = $data->toJson();
     return view('vendor.voyager.calendar', compact('newData'));

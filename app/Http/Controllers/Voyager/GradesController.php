@@ -157,17 +157,24 @@ class GradesController extends VoyagerBaseController
     if($this->checkTeacherPermission() === "teacher") {
       $dataTypeContent = $dataTypeContent->unique('classroom_id')->load(['classroom']);
       $dataTypeContent = $dataTypeContent->filter(function ($item, $key) {
-//        $single_agent = $agent->where('agent_allocated_date',$item->agent_allocated_date);
-        $teacher_id = $item->getRelation('classroom')->load(['teacher'])->getRelation('teacher')->user_id;
-        //dd($item->getRelation('classroom')->load(['teacher'])->getRelation('teacher')->user_id);
-        if(Auth::user()->id === $teacher_id) {
-            return $item;
-        }
-        unset($key);
+        $newItems = $item->getRelation('classroom')->load(['classSchedule'])->getRelation('classSchedule');
+
+          $newItems = $newItems->filter(function($item, $key) {
+            $teacher_id = $item->load(['teacher', 'room'])->getRelation('teacher')->user_id;
+            //dd($item->load(['teacher'])->getRelation('teacher')->user_id);
+            if($item->schedule_type === 'classSchedule' && Auth::user()->id === $teacher_id) {
+              $item->roomAttribute = $item->getRelation('room')->name;
+              //dd($item);
+              return $item;
+            }
+          });
+
+            if($newItems->count()) {
+              return $item;
+            }
       });
-
     }
-
+    //dd($dataTypeContent);
 
     return Voyager::view($view, compact(
       'actions',

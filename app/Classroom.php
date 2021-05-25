@@ -20,4 +20,8 @@ class Classroom extends Model
     return $this->belongsToMany(Category::class);
   }
 
+  public function classSchedule() {
+    return $this->hasMany(ClassSchedule::class);
+  }
+
 }

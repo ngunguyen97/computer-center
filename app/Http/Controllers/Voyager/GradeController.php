@@ -59,16 +59,15 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        if(!empty($request->all())) {
-
-          foreach ($request->all()['data'] as $item) {
-            Grade::where('classroom_id', $item['classroom_id'])
-                  ->where('student_id', $item['student_id'])
-                  ->update(['test_score' => json_encode($item)]);
-
+        if($request->has('classroomId')) {
+          foreach ($request->get('items') as $item) {
+            Grade::where('classroom_id', $request->get('classroomId'))
+                  ->where('student_id', $item['userId'])
+                  ->update(['test_score' => json_encode($item['grades'])]);
           }
-
-          return response()->json(['success' => TRUE, 'messages'=> ['status' => 'success', 'message'=> 'Cập Nhật Thành Công']]);
+          return back()->with(['message' => "Lưu thành công", 'alert-type' => 'success']);
+        }else {
+          return back()->with(['message' => "Lưu không thành công", 'alert-type' => 'error']);
         }
     }
 
