@@ -1,6 +1,6 @@
 <ul>
   <li class="list-group-item {{ Route::currentRouteName() == 'student.edit' ? 'active' : '' }} "><a href="{{ route('student.edit') }}">Hồ sơ</a></li>
-  <li class="list-group-item"><a href="#">Phiếu Đăng Ký</a></li>
+  <li class="list-group-item" {{ Route::currentRouteName() == 'student.document.index' ? 'active' : '' }}><a href="{{ route('student.document.index') }}">Tài Liệu</a></li>
   <li class="list-group-item {{ Route::currentRouteName() == 'student.checkpoint.show' ? 'active' : '' }}"><a href="{{ route('student.checkpoint.show', ['user' => Auth::guard('student')->user()->id ]) }}">Xem Điểm</a></li>
   <li class="list-group-item {{ Route::currentRouteName() == 'student.review.index' ? 'active' : '' }}"><a href="{{ route('student.review.index') }}">Phúc Khảo</a></li>
   <li class="list-group-item {{ Route::currentRouteName() == 'student.reexamination.index' ? 'active' : '' }}"><a href="{{ route('student.reexamination.index') }}">Đăng ký thi lại</a></li>

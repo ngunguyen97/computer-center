@@ -23,9 +23,11 @@
                   <th colspan="2" scope="colgroup">Excel</th>
                   <th colspan="2" scope="colgroup">Powerpoint</th>
                   <th colspan="2" scope="colgroup">Xếp Loại</th>
-                  <th rowspan="2">Ghi Chú</th>
+                  <th colspan="2">Ghi Chú</th>
                 </tr>
                 <tr>
+                  <th scope="col">Lần 1</th>
+                  <th scope="col">Lần 2</th>
                   <th scope="col">Lần 1</th>
                   <th scope="col">Lần 2</th>
                   <th scope="col">Lần 1</th>
@@ -45,46 +47,22 @@
                       <td style="width: 160px">{{ $row->HP_id }}</td>
                       <td style="width: 180px;">{{ $row->name }}</td>
 
-                      <td style="max-width: 30px;">
-                        @if(isset($row->test_score))
-                          {{ json_decode($row->test_score)->grades->theory->first_time }}
-                        @endif
-                      </td>
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->theory->second_time }}
-                      </td> <!-- Ly Thuyet -->
+                      @if(!empty($row->test_score))
+                        @foreach(json_decode($row->test_score, true) as $key => $value)
+                          <td style="max-width: 30px;">
+                            {{ $value["first_time"] }}
+                          </td>
+                          <td style="max-width: 30px;">
+                            {{ $value["second_time"] }}
+                          </td><!-- Ly Thuyet -->
+                        @endforeach
+                      @else
+                        @for($i = 0 ;$i < 6; $i++)
+                          <td style="max-width: 30px;"></td>
+                          <td style="max-width: 30px;"></td>
+                        @endfor
+                      @endif
 
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->practice->word->first_time }}
-                      </td>
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->practice->word->second_time }}
-                      </td> <!-- Word -->
-
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->practice->excel->first_time }}
-                      </td>
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->practice->excel->second_time }}
-                      </td> <!-- EXCEL -->
-
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->practice->powerpoint->first_time }}
-                      </td>
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->practice->powerpoint->second_time }}
-                      </td> <!-- PowerPoint -->
-
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->classification->first_time }}
-                      </td>
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->classification->second_time }}
-                      </td> <!-- XEP Loai -->
-
-                      <td style="max-width: 60px;" >
-                        {{ json_decode($row->test_score)->grades->note->value }}
-                      </td> <!-- NOTE -->
 
                     </tr>
 
@@ -105,9 +83,11 @@
                   <th colspan="2" scope="colgroup">Lý Thuyết</th>
                   <th colspan="2" scope="colgroup">Thực Hành</th>
                   <th colspan="2" scope="colgroup">Xếp Loại</th>
-                  <th rowspan="2">Ghi Chú</th>
+                  <th colspan="2">Ghi Chú</th>
                 </tr>
                 <tr>
+                  <th scope="col">Lần 1</th>
+                  <th scope="col">Lần 2</th>
                   <th scope="col">Lần 1</th>
                   <th scope="col">Lần 2</th>
                   <th scope="col">Lần 1</th>
@@ -121,35 +101,21 @@
                     <tr class="text-center">
                       <td style="width: 160px">{{ $row->HP_id }}</td>
                       <td style="width: 180px;">{{ $row->name }}</td>
-
-                      <td style="max-width: 30px;">
-                        @if(isset($row->test_score))
-                          {{ json_decode($row->test_score)->grades->theory->first_time }}
-                        @endif
-                      </td>
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->theory->second_time }}
-                      </td> <!-- Ly Thuyet -->
-
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->practice->first_time }}
-                      </td>
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->practice->second_time }}
-                      </td> <!-- Word -->
-
-
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->classification->first_time }}
-                      </td>
-                      <td style="max-width: 30px;">
-                        {{ json_decode($row->test_score)->grades->classification->second_time }}
-                      </td> <!-- XEP Loai -->
-
-                      <td style="max-width: 60px;" >
-                        {{ json_decode($row->test_score)->grades->note->value }}
-                      </td> <!-- NOTE -->
-
+                      @if(!empty($row->test_score))
+                        @foreach(json_decode($row->test_score, true) as $key => $value)
+                          <td style="max-width: 30px;">
+                            {{ $value["first_time"] }}
+                          </td>
+                          <td style="max-width: 30px;">
+                            {{ $value["second_time"] }}
+                          </td><!-- Ly Thuyet -->
+                        @endforeach
+                       @else
+                       @for($i = 0 ;$i < 4; $i++)
+                          <td style="max-width: 30px;"></td>
+                          <td style="max-width: 30px;"></td>
+                       @endfor
+                      @endif
                     </tr>
 
                 @endforeach

@@ -25,12 +25,6 @@
                     Tin Tức và Sự Kiện
                   </a>
               </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    Liên Hệ
-                  </a>
-              </li>
-
             </ul>
             <span class="navbar-text">
               <a href="{{ route('cart.index') }}" style="font-size: 1.6rem;">

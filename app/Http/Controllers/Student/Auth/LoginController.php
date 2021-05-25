@@ -15,6 +15,10 @@ class LoginController extends Controller
    */
   public function showLoginForm()
   {
+    if(Auth::guard('student')->check()) {
+      return redirect()
+        ->intended(route('student.edit'));
+    }
     return view('auth.login',[
       'title' => 'Học viên Đăng Nhập',
       'loginRoute' => 'student.login',

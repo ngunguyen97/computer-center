@@ -8,10 +8,11 @@
       </a>
 
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ route('student.edit') }}">Hồ sơ</a>
         <a class="dropdown-item" href="{{ route('student.logout') }}"
            onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-          {{ __('Logout') }}
+          {{ __('Đăng xuất') }}
         </a>
 
         <form id="logout-form" action="{{ route('student.logout') }}" method="POST" style="display: none;">

@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
 use App\Document;
 use Illuminate\Http\Request;
-use TCG\Voyager\Facades\Voyager;
+use App\Http\Controllers\Controller;
 
 class DocumentController extends Controller
 {
+    public function __construct() {
+      $this->middleware('auth:student')->except('logout');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +30,8 @@ class DocumentController extends Controller
     if($item->count()) {
       $path = json_decode($item->filename, true)[0]["download_link"];
       $name = json_decode($item->filename, true)[0]["original_name"];
-      $path_test = Voyager::image($path);
-      dd($path_test);
       //PDF file is stored under project/public/download/info.pdf
       $file= public_path('storage/'. $path);
-      //dd($file);
-
-      //dd(storage_path($file_name));
 
       return response()->download($file, $name);
     }
