@@ -70,8 +70,10 @@ Route::group(['prefix' => 'admin'], function () {
    });
   Voyager::routes();
 });
-
-Route::get('/test-case', 'AttendanceController@index');
+Route::get('/view-case', 'DocumentController@index')->name('file.index');
+Route::get('/test-case', 'DocumentController@create')->name('file.create');
+Route::post('/test-case', 'DocumentController@store')->name('file.store');
+Route::get('/download/{slug}','DocumentController@getDownload')->name('file.download');
 
 
 Route::prefix('/student')->name('student.')->namespace('Student')->group(function () {
@@ -103,3 +105,6 @@ Route::prefix('/student')->name('student.')->namespace('Student')->group(functio
   Route::post('/re-examination', 'ReexaminationController@store')->name('reexamination.store');
   Route::get('/re-examination/schedule', 'ReexaminationController@show')->name('reexamination.show');
 });
+
+// storage link
+//ln -sr storage/app/public public/storage
