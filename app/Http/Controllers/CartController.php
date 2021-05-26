@@ -42,10 +42,13 @@ class CartController extends Controller
       if($duplicates->isNotEmpty()) {
         return redirect()->route('cart.index');
       }
+
+      if(Cart::count() > 0) {
+        return redirect()->route('cart.index')->withErrors(['msg' => 'Giới hạn đăng ký: mỗi lần chỉ được đăng ký một khóa học.']);
+      }
+
       Cart::add($request->id, $request->name, 1, $request->fee, ['hp_id' => $request->hp_id, 'description' => $request->description, 'start_day' => $request->start_day])
         ->associate('App\Classroom');
-
-
 
       return redirect()->route('cart.index')->with('success_message','Đã thêm thành công');
     }
