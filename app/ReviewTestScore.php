@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReviewTestScores extends Model
+class ReviewTestScore extends Model
 {
   protected $guarded = [];
 }
