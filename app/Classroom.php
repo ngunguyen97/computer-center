@@ -16,12 +16,16 @@ class Classroom extends Model
     return $this->belongsTo(Teacher::class);
   }
 
-  public function categories() {
-    return $this->belongsToMany(Category::class);
+  public function category() {
+    return $this->belongsTo(Category::class);
   }
 
   public function classSchedule() {
     return $this->hasMany(ClassSchedule::class);
+  }
+
+  public function retestSchedule() {
+    return $this->hasMany(RetestSchedule::class);
   }
 
 }
