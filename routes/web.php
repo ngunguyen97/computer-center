@@ -51,6 +51,10 @@ Route::get('/email', function (){
 });
 
 
+  Route::namespace('Exports')->group(function(){
+    Route::get('/test/export/{slug}', 'ReexaminationController@export')->name('test');
+  });
+
 //Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -67,8 +71,19 @@ Route::group(['prefix' => 'admin'], function () {
       Route::get('/retest_schedule', 'RetestScheduleController@index')->name('retest.index');
       Route::get('/attendance/{classroom}', 'AttendanceController@show')->name('attendance.show');
       Route::post('/attendance/{classroom}', 'AttendanceController@update')->name('attendance.update');
+      Route::get('/course_cancel', 'CourseCancelController@index')->name('course.cancel.index');
+      Route::delete('/course_cancel/{id}', 'CourseCancelController@destroy')->name('course.cancel.destroy');
      });
    });
+
+  Route::namespace('Exports')->group(function() {
+    Route::group(['middleware' => 'admin.user'], function () {
+      Route::get('/export_reexaminations', 'ReexaminationController@index')->name('export.reexaminations.index');
+      Route::get('/export/{slug}', 'ReexaminationController@export')->name('export.download');
+      Route::get('/export_students', 'StudentExportController@index')->name('export.student.index');
+      Route::get('/export_students/download/{slug}','StudentExportController@export')->name('export.student.download');
+    });
+  });
   Voyager::routes();
 });
 

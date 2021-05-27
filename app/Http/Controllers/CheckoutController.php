@@ -145,24 +145,12 @@ class CheckoutController extends Controller
     private function addStudentToGradeTables($student) {
       $studentId = $student->id;
       $classroom_id = $this->getClassroomId();
-      $test_sore = $this->checkHPType();
       Grade::create([
         'classroom_id' => $classroom_id,
         'student_id' => $studentId,
         'attendance' => null,
-        'test_score' => $test_sore
+        'test_score' => null
       ]);
-    }
-
-    private function checkHPType() {
-      foreach (Cart::content() as $item) {
-        $item->model->HP_id;
-        if(str_contains($item->model->HP_id, 'THVP')) {
-          return $this->GradeTHVPType();
-        }else {
-          return $this->GradeAnotherType();
-        }
-      }
     }
 
     private function getClassroomId() {
@@ -173,69 +161,7 @@ class CheckoutController extends Controller
       return $classroom;
     }
 
-    private function GradeAnotherType() {
-      $arrAnotherType = array(
-        "classroom_id" => null,
-        "student_id" => null,
-        "grades" => [
-          "theory" => [
-            "first_time" => null,
-            "second_time" => null,
 
-          ],
-          "practice" => [
-            "first_time" => null,
-            "second_time" => null,
-          ],
-          "classification" => [
-            "first_time" => null,
-            "second_time" => null
-          ],
-          "note" => [
-            "value" => null
-          ]
-        ]
-      );
-      $arrAnotherType = json_encode($arrAnotherType);
-      return $arrAnotherType;
-    }
-
-    private function GradeTHVPType() {
-      $type = array(
-        "classroom_id" => null,
-        "student_id" => null,
-        "grades" => [
-          "theory" => [
-            "first_time" => null,
-            "second_time" => null,
-
-          ],
-          "practice" => [
-            "word" => [
-              "first_time" => null,
-              "second_time" => null,
-            ],
-            "excel" => [
-              "first_time" => null,
-              "second_time" => null,
-            ],
-            "powerpoint" => [
-              "first_time" => null,
-              "second_time" => null,
-            ]
-          ],
-          "classification" => [
-            "first_time" => null,
-            "second_time" => null
-          ],
-          "note" => [
-            "value" => null
-          ]
-        ]
-      );
-      $type = json_encode($type);
-      return $type;
-    }
 
     /**
      * Display the specified resource.

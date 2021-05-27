@@ -16,22 +16,26 @@ class ScheduleController extends Controller
    */
   public function index()
   {
-    $rooms = Classroom::with('categories')
-                      ->where('status', true)
-                      ->get();
-    $categories = Category::all();
-
-    $rooms = $rooms->filter(function ($item) {
-      $nowDate =  Carbon::now();
-      $startDate = Carbon::createFromFormat('Y-m-d',$item->start_day);
-      $endDate = Carbon::createFromFormat('Y-m-d',$item->end_day);
-      //dd($nowDate->between($startDate, $endDate));
-      if($nowDate->between($startDate, $endDate)) {
-        return $item;
-      }
+    $rooms = Category::with('classrooms')->get();
+    $rooms = $rooms->filter(function($item) {
+        $newItems = $item->classrooms;
+        if($item->classrooms->count()) {
+           $newItems = $newItems->filter(function($subItem) {
+            $nowDate =  Carbon::now();
+            $startDate = Carbon::createFromFormat('Y-m-d',$subItem->start_day);
+            $endDate = Carbon::createFromFormat('Y-m-d',$subItem->end_day);
+            if($nowDate->between($startDate, $endDate) && $subItem->status === 1) {
+              return $subItem;
+            }
+          });
+          if($newItems->count()) {
+            return $item->newclassrooms = $newItems;
+          }
+        }
     });
 
-    return view('schedule')->with(compact('rooms', 'categories'));
+
+    return view('schedule')->with(compact('rooms'));
   }
 
   /**

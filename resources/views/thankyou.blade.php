@@ -12,7 +12,6 @@
 
   <div class="thank-you-section">
     <h1>Cảm ơn bạn đã tin tưởng và chọn trung tâm.</h1>
-    <p>Một email xác nhận đã được gửi</p>
     <div class="spacer"></div>
     <div>
       <a href="{{ url('/') }}" class="button">Trang chủ</a>

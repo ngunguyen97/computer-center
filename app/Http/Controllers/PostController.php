@@ -14,8 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('status', 'PUBLISHED')->take(8)->get();
-        //dd($posts);
+        $posts = Post::where('status', 'PUBLISHED')->take(8)->orderBy('id', 'DESC')->get();
         return view('posts', compact('posts'));
     }
 

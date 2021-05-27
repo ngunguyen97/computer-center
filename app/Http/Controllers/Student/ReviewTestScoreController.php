@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\ReviewTestScores;
+use App\ReviewTestScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -42,7 +42,7 @@ class ReviewTestScoreController extends Controller
   public function store(Request $request, $id)
   {
     $parameters = $request->only('classroom_id', 'content');
-     $newItem = ReviewTestScores::create([
+     $newItem = ReviewTestScore::create([
        'classroom_id' => $parameters['classroom_id'],
        'student_id' => $id,
        'content' => $parameters['content']
