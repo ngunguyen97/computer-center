@@ -11,6 +11,7 @@
     </tr>
   </thead>
   <tbody>
+  @if($dataTypeContent->count() > 0)
   @foreach($dataTypeContent as $data)
     <tr>
       <td>{{ $data->classroom->HP_id }}</td>
@@ -22,5 +23,10 @@
       <td>{{ $data->classroom->retestSchedule[0]->room->name }}</td>
     </tr>
   @endforeach
+  @else
+    <tr>
+      <td colspan="7">Không có học viên nào đăng ký thi lại</td>
+    </tr>
+  @endif
   </tbody>
 </table>

@@ -101,7 +101,7 @@
             <div class="row no-gutters">
               <div class="col-md-4">
                 <a href="{{route('post.show', $post->slug)}}">
-                  <img src="{{ asset('storage/'. $post->image) }}" alt="{{ $post->title }}" class="img-thumbnail">
+                  <img src="{{ loadImageViaS3($post->image) }}" alt="{{ $post->title }}" class="img-thumbnail">
                 </a>
               </div>
               <div class="col-md-8">

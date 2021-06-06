@@ -5,7 +5,7 @@
 @section('page_header')
   <div class="container-fluid">
     <h1 class="page-title">
-      <i class="{{ $dataType->icon }}"></i> Xuất Danh Thi Lại
+      <i class="{{ $dataType->icon }}"></i> Xuất Danh Sách Cấp Tín Chỉ
     </h1>
     @can('edit', app($dataType->model_name))
       @if(isset($dataType->order_column) && isset($dataType->order_display_column))
