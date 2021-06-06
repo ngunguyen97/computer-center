@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Document;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
@@ -26,14 +27,19 @@ class DocumentController extends Controller
   public function getDownload($slug)
   {
     $item = Document::where('slug', '=', $slug)->firstOrFail();
-
     if($item->count()) {
-      $path = json_decode($item->filename, true)[0]["download_link"];
+      $filename = json_decode($item->filename, true)[0]["download_link"];
       $name = json_decode($item->filename, true)[0]["original_name"];
-      //PDF file is stored under project/public/download/info.pdf
-      $file= public_path('storage/'. $path);
+      $file= Storage::disk('s3')->get($filename);
 
-      return response()->download($file, $name);
+      $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Description' => 'File Transfer',
+        'Content-Disposition' => "attachment; filename={$name}",
+        'filename'=> $name
+      ];
+
+      return response($file, 200, $headers);
     }
 
   }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -37,12 +38,17 @@ class PostController extends Controller
     $item = Post::where('slug', '=', $slug)->firstOrFail();
 
     if($item->count()) {
-      $path = json_decode($item->meta_description, true)[0]["download_link"];
+      $filename = json_decode($item->meta_description, true)[0]["download_link"];
       $name = json_decode($item->meta_description, true)[0]["original_name"];
-      //PDF file is stored under project/public/download/info.pdf
-      $file= public_path('storage/'. $path);
+      $file= Storage::disk('s3')->get($filename);
 
-      return response()->download($file, $name);
+      $headers = [
+        'Content-Description' => 'File Transfer',
+        'Content-Disposition' => "attachment; filename={$name}",
+        'filename'=> $name
+      ];
+
+      return response($file, 200, $headers);
     }
 
   }

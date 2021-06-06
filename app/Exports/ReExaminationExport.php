@@ -38,5 +38,8 @@ class ReExaminationExport implements FromView, ShouldAutoSize
           'dataTypeContent' => $data
         ]);
       }
+    return view('exports.re-examinations', [
+      'dataTypeContent' => $data
+    ]);
     }
 }
