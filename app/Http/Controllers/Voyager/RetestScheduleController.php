@@ -35,10 +35,12 @@ class RetestScheduleController extends Controller
             'retest_schedules.color as borderColor',
             'teachers.name as teacher',
             'rooms.name as room',
-            'classrooms.HP_id',
-            DB::raw('CONCAT(classrooms.name, " - ", classrooms.HP_id) AS title'))
+            'classrooms.HP_id')
           ->where('teachers.user_id', $user->id)
           ->get();
+        $data = $data->each(function ($item){
+          $item->title = $item->HP_id.' - '. $item->draft_title;
+        });
 
         $newData = $data->toJson();
         return view('vendor.voyager.calendar', compact('newData'));
